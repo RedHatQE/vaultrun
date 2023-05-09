@@ -25,7 +25,7 @@ VAULT_PATH = "/mps-qe/managed-services"
 )
 @click.option(
     "-t",
-    "--vault-token",
+    "--token",
     help="Vault token",
     required=False,
     envvar="VAULT_TOKEN",
@@ -39,8 +39,8 @@ VAULT_PATH = "/mps-qe/managed-services"
     required=False,
     type=click.File(),
 )
-def main(action, vault_token, secret_name, yaml_path):
-    vault_client = get_vault_client(token=vault_token)
+def main(action, token, secret_name, yaml_path):
+    vault_client = get_vault_client(token=token)
     if action == "add":
         add_secret(
             secret_name=secret_name, vault_client=vault_client, yaml_path=yaml_path
