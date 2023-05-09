@@ -27,7 +27,7 @@ VAULT_PATH = "/mps-qe/managed-services"
     "-t",
     "--vault-token",
     help="Vault token",
-    required=True,
+    required=False,
     envvar="VAULT_TOKEN",
     show_default=True,
 )
