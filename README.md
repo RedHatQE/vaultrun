@@ -1,4 +1,4 @@
-# vault_cli
+# vault-cli
 Vault cli helper
 
 # Installation
