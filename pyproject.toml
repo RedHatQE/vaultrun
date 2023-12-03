@@ -9,7 +9,7 @@ exclude = [".git", ".venv", ".mypy_cache", ".tox", "__pycache__"]
 
 [tool.poetry]
 name = "vaultrun"
-version = "1.0.0"
+version = "0.0.0"
 description = "Rofi/Dmenu to interact with vault."
 authors = ["Meni Yakove", "Ruth Netser"]
 readme = "README.md"
