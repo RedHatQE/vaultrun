@@ -1,69 +1,46 @@
-[tool.black]
-line-length = 88
-target_version = ['py39', 'py310', "py311"]
-exclude = '''
-(
-  /(
-    | \.git
-    | \.venv
-    | \.mypy_cache
-    | \.tox
-  )/
-)
-'''
+[tool.ruff]
+preview = true
+line-length = 120
+fix = true
+output-format = "grouped"
 
-[tool.isort]
-line_length = 88
-profile = "black"
+[tool.ruff.format]
+exclude = [".git", ".venv", ".mypy_cache", ".tox", "__pycache__"]
 
 [tool.poetry]
-name = "vault-cli"
-version = "1.0.0"
-description = "CLI to interact with vault."
+name = "vaultrun"
+version = "0.0.0"
+description = "Rofi/Dmenu to interact with vault."
 authors = ["Meni Yakove", "Ruth Netser"]
 readme = "README.md"
-repository = "https://github.com/RedHatQE/vault_cli"
+repository = "https://github.com/RedHatQE/vaultrun"
 
 packages = [
     { include = "app" },
 ]
 
 [tool.poetry.scripts]
-vault-cli = "app.cli:main"
+vaultrun = "app.vaultrun:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-colorlog = "*"
-click = "*"
-hvac = "*"
-pyyaml = "*"
+python-rofi = "^1.0.1"
+dmenu = "^0.2.1"
+hvac = {extras = ["parser"], version = "^2.0.0"}
+ruff = "^0.1.6"
+rich = "^13.7.0"
 
-[tool.poetry.dev-dependencies]
-ipython = "*"
-ipdb = "*"
+[tool.poetry.group.dev.dependencies]
+ipdb = "^0.13.13"
+ipython = "^8.18.1"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+pattern = "((?P<epoch>\\d+)!)?(?P<base>\\d+(\\.\\d+)*)"
+
+[tool.poetry-dynamic-versioning.substitution]
+files = ["VERSION"]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-
-[tool.ruff]
-line-length = 120
-
-## Allow autofix for all enabled rules (when `--fix`) is provided.
-fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
-
-# Exclude a variety of commonly ignored directories.
-exclude = [
-    ".eggs",
-    ".git",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    "__pypackages__",
-    "build",
-    "dist",
-    "node_modules",
-    "venv",
-]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
