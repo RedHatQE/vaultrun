@@ -5,7 +5,7 @@ import urllib.parse
 
 OIDC_CALLBACK_PORT = 8250
 OIDC_REDIRECT_URI = f"http://localhost:{OIDC_CALLBACK_PORT}/oidc/callback"
-ROLE = None # Use None (not empty string) for the default Role
+ROLE = None  # Use None (not empty string) for the default Role
 SELF_CLOSING_PAGE = """
 <!doctype html>
 <html>

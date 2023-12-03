@@ -1,5 +1,5 @@
 [flake8]
-select=FCN,M511
+select=M511
 
 exclude =
     doc,
@@ -9,19 +9,3 @@ exclude =
     Pipfile.*,
     docs/*,
     .cache/*
-
-fcn_exclude_functions =
-    LOGGER,
-    re,
-    json,
-    yaml,
-    ast,
-    logger,
-    write,
-    os,
-    shutil,
-    render,
-    meta,
-
-enable-extensions =
-    FCN,
