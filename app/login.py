@@ -40,7 +40,7 @@ def vault_login():
     )
     auth_url = auth_url_response["data"]["auth_url"]
     if auth_url == "":
-        return None  # TODO: throw a nicer error
+        return None
 
     params = urllib.parse.parse_qs(auth_url.split("?")[1])
     auth_url_nonce = params["nonce"][0]
