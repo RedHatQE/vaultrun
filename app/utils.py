@@ -1,9 +1,14 @@
 import os
 import sys
 from configparser import ConfigParser
-
+from subprocess import Popen, PIPE
 from rofi import Rofi
 import dmenu
+
+
+def copy_to_clipboard(text):
+    p = Popen(["xsel", "-i"], stdin=PIPE)
+    p.communicate(input=text)
 
 
 def which(program):

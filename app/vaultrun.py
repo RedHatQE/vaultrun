@@ -1,5 +1,5 @@
 from app.login import vault_login
-from app.utils import call_rofi_dmenu, parse_user_config
+from app.utils import call_rofi_dmenu, parse_user_config, which, copy_to_clipboard
 from rich import print, pretty
 
 
@@ -33,7 +33,11 @@ def main():
         if key_selected == "All":
             print(_secret)
         else:
-            print(_secret[key_selected])
+            secret_for_user = _secret[key_selected]
+            if which("xsel"):
+                copy_to_clipboard(str.encode(secret_for_user))
+
+            print(secret_for_user)
 
 
 if __name__ == "__main__":
