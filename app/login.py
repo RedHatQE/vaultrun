@@ -46,7 +46,7 @@ def vault_login() -> hvac.Client | None:
     auth_url_nonce = params["nonce"][0]
     auth_url_state = params["state"][0]
 
-    webbrowser.open(auth_url)
+    webbrowser.open(auth_url, autoraise=False)
     token = login_oidc_get_token()
 
     auth_result = client.auth.oidc.oidc_callback(
