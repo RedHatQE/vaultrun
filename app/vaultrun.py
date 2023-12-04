@@ -29,7 +29,11 @@ def main():
             path=f"{_secret_path}/{user_selection}",
             raise_on_deleted_version=False,
         )["data"]["data"]
-        print(_secret)
+        key_selected = call_rofi_dmenu(options=["All"] + [*_secret], abort=True, prompt=None)
+        if key_selected == "All":
+            print(_secret)
+        else:
+            print(_secret[key_selected])
 
 
 if __name__ == "__main__":

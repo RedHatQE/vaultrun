@@ -26,7 +26,7 @@ def which(program):
 def call_rofi_dmenu(options, abort=True, prompt=None):
     if which("rofi"):
         _rofi = Rofi()
-        index, key = _rofi.select(prompt if prompt else "Select:", options)
+        index, key = _rofi.select(prompt or "Select:", options)
         if key == -1:
             sys.exit(0)
         return options[index]
