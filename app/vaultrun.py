@@ -1,9 +1,11 @@
+import hvac
+
 from app.login import vault_login
 from app.utils import call_rofi_dmenu, parse_user_config, which, copy_to_clipboard
 from rich import print, pretty
 
 
-def parse_vault_path(client, mount_point, secret_path):
+def parse_vault_path(client: hvac.Client, mount_point: str, secret_path: str) -> str:
     all_secrets = client.secrets.kv.v2.list_secrets(mount_point=mount_point, path=secret_path)
     _selected = call_rofi_dmenu(options=all_secrets.get("data", {}).get("keys"), abort=True, prompt=None)
     if _selected.endswith("/"):

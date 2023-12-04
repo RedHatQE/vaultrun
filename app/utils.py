@@ -6,14 +6,14 @@ from rofi import Rofi
 import dmenu
 
 
-def copy_to_clipboard(text):
+def copy_to_clipboard(text: bytes):
     p = Popen(["xsel", "-i"], stdin=PIPE)
     p.communicate(input=text)
 
 
-def which(program):
-    def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+def which(program: str) -> str | None:
+    def is_exe(_fpath):
+        return os.path.isfile(_fpath) and os.access(_fpath, os.X_OK)
 
     fpath, _ = os.path.split(program)
     if fpath:
@@ -28,7 +28,7 @@ def which(program):
     return None
 
 
-def call_rofi_dmenu(options, abort=True, prompt=None):
+def call_rofi_dmenu(options: list, abort: bool = True, prompt: str = None) -> str:
     if which("rofi"):
         _rofi = Rofi()
         index, key = _rofi.select(prompt or "Select:", options)
@@ -43,7 +43,7 @@ def call_rofi_dmenu(options, abort=True, prompt=None):
         return user_select
 
 
-def parse_user_config():
+def parse_user_config() -> tuple:
     config_file = os.path.join(os.path.expanduser("~"), ".config", "vaultrun", "config")
     _config_parser = ConfigParser()
     # Open the file with the correct encoding
@@ -52,7 +52,7 @@ def parse_user_config():
     if len(sections_from_config) == 1:
         config_section = sections_from_config[0]
     else:
-        config_section = call_rofi_dmenu(options=sections_from_config, abort=True, prompt=None)
+        config_section = call_rofi_dmenu(options=sections_from_config)
 
     _mount_point = _config_parser[config_section]["mount_point"]
     _secret_path = _config_parser[config_section]["secret_path"]

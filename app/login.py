@@ -31,7 +31,7 @@ window.onload = function load() {
 """
 
 
-def vault_login():
+def vault_login() -> hvac.Client | None:
     client = hvac.Client(verify=False)
 
     auth_url_response = client.auth.oidc.oidc_authorization_url_request(
@@ -64,7 +64,7 @@ def vault_login():
 
 
 # handles the callback
-def login_oidc_get_token():
+def login_oidc_get_token() -> str:
     from http.server import BaseHTTPRequestHandler, HTTPServer
 
     class HttpServ(HTTPServer):
