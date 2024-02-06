@@ -31,40 +31,47 @@ window.onload = function load() {
 """
 
 
-def vault_login() -> hvac.Client | None:
-    client = hvac.Client(verify=False)
+def vault_login(url=None, role_id=None, secret_id=None):
+    client = hvac.Client(url=url, verify=False)
 
-    auth_url_response = client.auth.oidc.oidc_authorization_url_request(
-        role=ROLE,
-        redirect_uri=OIDC_REDIRECT_URI,
-    )
-    auth_url = auth_url_response["data"]["auth_url"]
-    if auth_url == "":
-        return None
+    if role_id and secret_id:
+        client.auth.approle.login(
+            role_id=role_id,
+            secret_id=secret_id,
+        )
 
-    params = urllib.parse.parse_qs(auth_url.split("?")[1])
-    auth_url_nonce = params["nonce"][0]
-    auth_url_state = params["state"][0]
+    else:
+        auth_url_response = client.auth.oidc.oidc_authorization_url_request(
+            role=ROLE,
+            redirect_uri=OIDC_REDIRECT_URI,
+        )
+        auth_url = auth_url_response["data"]["auth_url"]
+        if auth_url == "":
+            return None
 
-    webbrowser.open(auth_url, autoraise=False)
-    token = login_oidc_get_token()
+        params = urllib.parse.parse_qs(auth_url.split("?")[1])
+        auth_url_nonce = params["nonce"][0]
+        auth_url_state = params["state"][0]
 
-    auth_result = client.auth.oidc.oidc_callback(
-        code=token,
-        path="oidc",
-        nonce=auth_url_nonce,
-        state=auth_url_state,
-    )
-    new_token = auth_result["auth"]["client_token"]
+        webbrowser.open(auth_url, autoraise=False)
+        token = login_oidc_get_token()
 
-    # If you want to continue using the client here
-    # update the client to use the new token
-    client.token = new_token
+        auth_result = client.auth.oidc.oidc_callback(
+            code=token,
+            path="oidc",
+            nonce=auth_url_nonce,
+            state=auth_url_state,
+        )
+        new_token = auth_result["auth"]["client_token"]
+
+        # If you want to continue using the client here
+        # update the client to use the new token
+        client.token = new_token
     return client
 
 
 # handles the callback
-def login_oidc_get_token() -> str:
+def login_oidc_get_token():
     from http.server import BaseHTTPRequestHandler, HTTPServer
 
     class HttpServ(HTTPServer):
