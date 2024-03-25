@@ -1,3 +1,1 @@
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
-}
+{"$schema": "https://docs.renovatebot.com/renovate-schema.json", "packageRules": [{"matchPackagePatterns": ["python-rofi", "dmenu", "hvac", "ruff", "rich", "pyyaml", "ipdb", "ipython"], "groupName": "poetry-deps"}]}
