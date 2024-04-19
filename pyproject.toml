@@ -27,7 +27,7 @@ python = "^3.9"
 python-rofi = "^1.0.1"
 dmenu = "^0.2.1"
 hvac = {extras = ["parser"], version = "^2.0.0"}
-ruff = "^0.3.0"
+ruff = "^0.4.0"
 rich = "^13.7.0"
 pyyaml = "^6.0.1"
 
