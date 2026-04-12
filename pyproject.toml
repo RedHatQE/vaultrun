@@ -26,7 +26,7 @@ python-rofi = "^1.0.1"
 dmenu = "^0.2.1"
 hvac = { extras = ["parser"], version = "^2.0.0" }
 ruff = "^0.12.0"
-rich = "^14.0.0"
+rich = "^15.0.0"
 pyyaml = "^6.0.1"
 
 [tool.poetry.group.dev.dependencies]
