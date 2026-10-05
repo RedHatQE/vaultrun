@@ -1,7 +1,7 @@
-import webbrowser
-import hvac
 import urllib.parse
+import webbrowser
 
+import hvac
 
 OIDC_CALLBACK_PORT = 8250
 OIDC_REDIRECT_URI = f"http://localhost:{OIDC_CALLBACK_PORT}/oidc/callback"
