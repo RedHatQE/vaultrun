@@ -1,8 +1,8 @@
 import hvac
+from rich import pretty, print
 
 from app.login import vault_login
-from app.utils import call_rofi_dmenu, which, copy_to_clipboard, parse_yaml_user_config
-from rich import print, pretty
+from app.utils import call_rofi_dmenu, copy_to_clipboard, parse_yaml_user_config, which
 
 
 def parse_vault_path(client: hvac.Client, mount_point: str, secret_path: str) -> str:
