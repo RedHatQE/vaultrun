@@ -1,9 +1,10 @@
 import os
 import sys
-from subprocess import Popen, PIPE
-from rofi import Rofi
-import yaml
+from subprocess import PIPE, Popen
+
 import dmenu
+import yaml
+from rofi import Rofi
 
 
 def copy_to_clipboard(text: bytes):
